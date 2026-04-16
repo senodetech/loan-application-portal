@@ -1,0 +1,18 @@
+<div class="w-full py-4 border-b border-slate-200 bg-white">
+  <div class="max-w-4xl mx-auto flex items-center justify-between px-4">
+    <div *ngFor="let step of steps; let isLast = last" class="flex items-center flex-1">
+      <div class="flex flex-col items-center cursor-pointer" (click)="stepSelected.emit(step.index)">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all"
+             [ngClass]="currentStep === step.index ? 'bg-emerald-600 text-white shadow-lg ring-4 ring-emerald-100' :
+                        currentStep > step.index ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-500'">
+          <span *ngIf="currentStep <= step.index">{{ step.index }}</span>
+          <span *ngIf="currentStep > step.index">✓</span>
+        </div>
+        <span class="text-xs font-semibold mt-2" [ngClass]="currentStep >= step.index ? 'text-slate-800' : 'text-slate-400'">
+          {{ step.label }}
+        </span>
+      </div>
+      <div *ngIf="!isLast" class="flex-1 h-0.5 mx-2" [ngClass]="currentStep > step.index ? 'bg-emerald-500' : 'bg-slate-200'"></div>
+    </div>
+  </div>
+</div>
